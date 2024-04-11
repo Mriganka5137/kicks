@@ -1,10 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 
 let isConnected: boolean = false;
 
 export const connectToDatabase = async () => {
-  mongoose.set("strictQuery", true);
-
   //   if MONGODB_URL is not set, then throw an error
   if (!process.env.MONGODB_URL) {
     return console.log("MONGODB_URL not found");
@@ -15,12 +13,11 @@ export const connectToDatabase = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-      dbName: "kicks",
-    });
-
+    const connection = await mongoose.connect(
+      process.env.MONGODB_URL as string
+    );
     isConnected = true;
-    console.log("MongoDB connected");
+    console.log(`MongoDB connected to ${connection.connection.host}`);
   } catch (error) {
     console.log("MongoDB not connected");
   }

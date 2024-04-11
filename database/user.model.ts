@@ -16,13 +16,13 @@ import { Schema, models, model, Document } from "mongoose";
  *
  */
 export enum Role {
-  ADMIN = "ADMIN",
-  USER = "USER",
+  ADMIN = "admin",
+  USER = "user",
 }
 
 export interface IUser extends Document {
   clerkId: string;
-  username: string;
+  username?: string;
   name: string;
   dob?: Date;
   email: string;
@@ -38,7 +38,7 @@ export interface IUser extends Document {
 const UserSchema = new Schema<IUser>(
   {
     clerkId: { type: String, required: true },
-    username: { type: String, required: true },
+    username: { type: String },
     name: { type: String, required: true },
     dob: { type: Date },
     email: { type: String, required: true },

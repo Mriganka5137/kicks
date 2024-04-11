@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 export default function Home() {
   const { user } = useUser();
@@ -8,6 +8,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       Home
+      <div>
+        <UserButton afterSignOutUrl="/sign-in" />
+      </div>
     </main>
   );
 }
